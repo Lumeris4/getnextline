@@ -16,10 +16,9 @@ char	*get_next_line(int fd)
 {
 	ssize_t bytes_read;
 	char buffer[BUFFER_SIZE];
-	static ssize_t i;
+	static ssize_t i = 0;
 	char *line;
 
-	i = 0;
 	bytes_read = read(fd, buffer, BUFFER_SIZE);
 	if (bytes_read == -1)
 		return (NULL);
