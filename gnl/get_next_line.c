@@ -18,7 +18,9 @@ char	*get_next_line(int fd)
 	char buffer[BUFFER_SIZE];
 	static ssize_t i = 0;
 	char *line;
+	ssize_t	j;
 
+	j = i;
 	bytes_read = read(fd, buffer, BUFFER_SIZE);
 	if (bytes_read == -1)
 		return (NULL);
@@ -26,7 +28,7 @@ char	*get_next_line(int fd)
 	{
 		i++;
 	}
-	line = malloc(sizeof(char) * i);
+	line = malloc(sizeof(char) * (i - j));
 	line = ft_strjoin(line ,buffer , i);
 	return (line);
 }
