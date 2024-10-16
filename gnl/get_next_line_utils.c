@@ -6,7 +6,7 @@
 /*   By: lelanglo <lelanglo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/16 10:41:46 by lelanglo          #+#    #+#             */
-/*   Updated: 2024/10/16 11:25:34 by lelanglo         ###   ########.fr       */
+/*   Updated: 2024/10/16 16:04:43 by lelanglo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ size_t	ft_strlen(const char *str)
 	return (i);
 }
 
-char	*ft_strjoin(char const *s1, char const *s2)
+char	*ft_strjoin(char const *s1, char const *s2, ssize_t limt)
 {
 	int		i;
 	int		j;
@@ -35,14 +35,14 @@ char	*ft_strjoin(char const *s1, char const *s2)
 		return (NULL);
 	i = 0;
 	j = 0;
-	while (s1[j])
+	while (s1[j] && ft_strlen(result) < (size_t)limt)
 	{
 		result[i] = s1[j];
 		i++;
 		j++;
 	}
 	j = 0;
-	while (s2[j])
+	while (s2[j] && ft_strlen(result) < (size_t)limt)
 	{
 		result[i] = s2[j];
 		i++;
