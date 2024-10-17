@@ -43,6 +43,7 @@ char	*get_next_line(int fd)
 	char			*line;
 	char			second_buffer[BUFFER_SIZE + 1];
 
+	bytes_read = 1;
 	if (fd < 0 || BUFFER_SIZE <= 0)
 		return (NULL);
 	index_line = newline((const char *)buffer);
