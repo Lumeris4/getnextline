@@ -44,6 +44,9 @@ static int	reading(int fd, char **buffer)
 	int		bytes_read;
 	char	*buffer_temp;
 
+	second_buffer = malloc((BUFFER_SIZE + 1) * sizeof(char));
+	if (!second_buffer)
+		return (0);
 	bytes_read = read(fd, second_buffer, BUFFER_SIZE);
 	if (bytes_read < 0)
 		return (-1);
