@@ -32,15 +32,23 @@ static void	ft_new_buffer(char **buffer, int index_line)
 {
 	char	*result;
 
-	result = ft_substr(*buffer, index_line + 1,
-			ft_strlen(*buffer) - index_line - 1);
-	free(*buffer);
-	*buffer = result;
+	if ((*buffer)[index_line + 1] == '\0')
+	{
+		free(*buffer);
+		*buffer = NULL;
+	}
+	else
+	{
+		result = ft_substr(*buffer, index_line + 1,
+				ft_strlen(*buffer) - index_line - 1);
+		free(*buffer);
+		*buffer = result;
+	}
 }
 
 static int	reading(int fd, char **buffer)
 {
-	char	second_buffer[BUFFER_SIZE + 1];
+	char	*second_buffer;
 	int		bytes_read;
 	char	*buffer_temp;
 
@@ -49,7 +57,10 @@ static int	reading(int fd, char **buffer)
 		return (0);
 	bytes_read = read(fd, second_buffer, BUFFER_SIZE);
 	if (bytes_read < 0)
+	{
+		free(second_buffer);
 		return (-1);
+	}
 	if (bytes_read == 0)
 	{
 		free(second_buffer);
@@ -58,6 +69,7 @@ static int	reading(int fd, char **buffer)
 	second_buffer[bytes_read] = '\0';
 	buffer_temp = ft_strjoin(*buffer, (const char *)second_buffer);
 	free(*buffer);
+	free(second_buffer);
 	*buffer = buffer_temp;
 	return (bytes_read);
 }
@@ -86,7 +98,7 @@ char	*get_next_line(int fd)
 		buffer = NULL;
 		return (line);
 	}
-	free(buffer)
+	free(buffer);
 	return (NULL);
 }
 
