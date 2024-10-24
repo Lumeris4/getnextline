@@ -50,6 +50,11 @@ static int	reading(int fd, char **buffer)
 	bytes_read = read(fd, second_buffer, BUFFER_SIZE);
 	if (bytes_read < 0)
 		return (-1);
+	if (bytes_read == 0)
+	{
+		free(second_buffer);
+		return (0);
+	}
 	second_buffer[bytes_read] = '\0';
 	buffer_temp = ft_strjoin(*buffer, (const char *)second_buffer);
 	free(*buffer);
@@ -81,6 +86,7 @@ char	*get_next_line(int fd)
 		buffer = NULL;
 		return (line);
 	}
+	free(buffer)
 	return (NULL);
 }
 
